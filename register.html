@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">🏗️</div>
+                <h2>Create Account</h2>
+                <p>Join the QTS student community</p>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="regName" class="form-input" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="regEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Current Level</label>
+                    <select id="regLevel" class="form-input" required>
+                        <option value="">Select Level</option>
+                        <option value="100">100 Level</option>
+                        <option value="200">200 Level</option>
+                        <option value="300">300 Level</option>
+                        <option value="400">400 Level</option>
+                        <option value="500">500 Level</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="regPassword" class="form-input" placeholder="Create a password" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Create Account</button>
+                <p style="text-align: center; color: var(--gray);">
+                    Already have an account? <a href="login.html" style="color: var(--primary); font-weight: 600;">Login</a>
+                </p>
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="index.html" style="color: var(--gray); text-decoration: none;">← Back to Home</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

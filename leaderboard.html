@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏗️</div>
+                <span>QTS Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+            </ul>
+            <div class="user-menu" style="display: none;">
+                <span class="user-name"></span>
+                <div class="user-avatar"></div>
+                <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+            </div>
+            <div class="auth-links">
+                <a href="login.html" class="btn btn-secondary btn-sm auth-link">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm auth-link">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <h1 style="text-align: center; color: white; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">🏆 Leaderboard</h1>
+        <p style="text-align: center; color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Top performers in course quizzes</p>
+
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🏆</div>
+                <h2 style="color: var(--primary);">Quiz Champions</h2>
+                <p style="color: var(--gray);">Ranked by quiz accuracy percentage</p>
+            </div>
+
+            <div id="leaderboardList">
+                <!-- Populated by JS -->
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: var(--radius-sm); text-align: center;">
+                <h4 style="color: #92400e; margin-bottom: 0.5rem;">🎯 How to Rank Up</h4>
+                <p style="color: #92400e;">Take more quizzes and aim for higher scores! Each correct answer boosts your ranking.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>QTS Resource Hub</h4>
+                <p style="color: rgba(255,255,255,0.7);">Built by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 QTS Resource Hub | <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Upload Slides | QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+    <style>
+        .upload-area {
+            border: 3px dashed var(--primary);
+            border-radius: var(--radius);
+            padding: 3rem;
+            text-align: center;
+            background: #f8fafc;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            background: #e0e7ff;
+            border-color: var(--secondary);
+        }
+        .upload-area.dragover {
+            background: #dbeafe;
+            border-color: var(--accent);
+        }
+        .file-list {
+            margin-top: 1rem;
+        }
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏗️</div>
+                <span>QTS Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="forum.html">Forum</a></li>
+            </ul>
+            <div class="user-menu" style="display: none;">
+                <span class="user-name"></span>
+                <div class="user-avatar"></div>
+                <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <h1 style="text-align: center; color: white; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">📤 Admin Panel</h1>
+        <p style="text-align: center; color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Upload slides and manage course materials</p>
+
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Upload New Slides</h2>
+
+            <form id="uploadForm">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="form-group">
+                        <label class="form-label">Level</label>
+                        <select id="uploadLevel" class="form-input" required>
+                            <option value="">Select Level</option>
+                            <option value="100">100 Level</option>
+                            <option value="200">200 Level</option>
+                            <option value="300">300 Level</option>
+                            <option value="400">400 Level</option>
+                            <option value="500">500 Level</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Semester</label>
+                        <select id="uploadSemester" class="form-input" required>
+                            <option value="">Select Semester</option>
+                            <option value="first">First Semester</option>
+                            <option value="second">Second Semester</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Course Code</label>
+                        <input type="text" id="uploadCourse" class="form-input" placeholder="e.g., QTS 101" required>
+                    </div>
+                </div>
+
+                <div class="upload-area" id="uploadArea">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📁</div>
+                    <h3>Drag & Drop files here</h3>
+                    <p style="color: var(--gray); margin: 0.5rem 0;">or click to browse</p>
+                    <input type="file" id="fileInput" accept=".pdf,.ppt,.pptx,.doc,.docx" multiple style="display: none;">
+                    <p style="font-size: 0.85rem; color: var(--gray);">Supported: PDF, PPT, PPTX, DOC, DOCX</p>
+                </div>
+
+                <div class="file-list" id="fileList"></div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 1rem;">
+                    📤 Upload All Files
+                </button>
+            </form>
+        </div>
+
+        <div class="card" style="max-width: 800px; margin: 2rem auto;">
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">Quick Reference - Course Codes</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">100L First Sem</h4>
+                    <p>QTS 101, QTS 103, MTH 101, PHY 101</p>
+                    <p>GST 111, COS 101, QTS 105, ACH 103</p>
+                    <p>QTS 107, URP 101</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">100L Second Sem</h4>
+                    <p>QTS 102, QTS 104, PHY 102, GST 112</p>
+                    <p>STA 121, QTS 106, ACH 105, GES 107</p>
+                    <p>GES 108</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">200L First Sem</h4>
+                    <p>QTS 201, QTS 203, QTS 205, MTH 102</p>
+                    <p>GES 201, URP 205, ECO 201, QTS 207</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">200L Second Sem</h4>
+                    <p>QTS 202, QTS 204, GST 212, STA 212</p>
+                    <p>QTS 208, QTS 206, ECO 202, GES 103</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">300L First Sem</h4>
+                    <p>QTS 301, QTS 303, QTS 305, QTS 307</p>
+                    <p>QTS 309, QTS 311, QTS 313</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="max-width: 800px; margin: 2rem auto; background: linear-gradient(135deg, #fef3c7, #fde68a);">
+            <h3 style="margin-bottom: 1rem; color: #92400e;">⚠️ Important Notes</h3>
+            <ul style="color: #92400e; line-height: 2; padding-left: 1.5rem;">
+                <li>Files are stored in browser storage (localStorage) for now</li>
+                <li>Connect Supabase (see README.md) for permanent cloud storage</li>
+                <li>Maximum file size depends on your storage setup</li>
+                <li>Use descriptive file names (e.g., "QTS101_Week1_Introduction.pdf")</li>
+                <li>Students will see files organized by level and semester</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>QTS Resource Hub</h4>
+                <p style="color: rgba(255,255,255,0.7);">Built by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 QTS Resource Hub | <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        let selectedFiles = [];
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            selectedFiles = [...selectedFiles, ...Array.from(files)];
+            renderFileList();
+        }
+
+        function renderFileList() {
+            if (selectedFiles.length === 0) {
+                fileList.innerHTML = '';
+                return;
+            }
+
+            fileList.innerHTML = selectedFiles.map((file, index) => `
+                <div class="file-item">
+                    <span style="font-size: 1.5rem;">📄</span>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">${file.name}</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">${(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="removeFile(${index})">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            renderFileList();
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (selectedFiles.length === 0) {
+                showToast('Please select files to upload', 'error');
+                return;
+            }
+
+            const level = document.getElementById('uploadLevel').value;
+            const semester = document.getElementById('uploadSemester').value;
+            const courseCode = document.getElementById('uploadCourse').value.toUpperCase();
+
+            // For now, store in localStorage (replace with Supabase when ready)
+            const uploadedSlides = JSON.parse(localStorage.getItem('qts_uploaded_slides') || '[]');
+
+            selectedFiles.forEach(file => {
+                // Create a blob URL for the file (temporary)
+                const fileUrl = URL.createObjectURL(file);
+
+                uploadedSlides.push({
+                    courseCode,
+                    level: parseInt(level),
+                    semester,
+                    fileName: file.name,
+                    fileUrl,
+                    uploadedAt: new Date().toISOString()
+                });
+
+                // Also add to courseData structure
+                if (courseData[level] && courseData[level][semester]) {
+                    const course = courseData[level][semester].find(c => c.code === courseCode);
+                    if (course) {
+                        course.slides.push({
+                            name: file.name,
+                            url: fileUrl
+                        });
+                    }
+                }
+            });
+
+            localStorage.setItem('qts_uploaded_slides', JSON.stringify(uploadedSlides));
+            localStorage.setItem('qts_course_data', JSON.stringify(courseData));
+
+            showToast(`${selectedFiles.length} file(s) uploaded successfully!`, 'success');
+            selectedFiles = [];
+            renderFileList();
+            document.getElementById('uploadForm').reset();
+        });
+
+        // Load saved course data if exists
+        const savedData = localStorage.getItem('qts_course_data');
+        if (savedData) {
+            Object.assign(courseData, JSON.parse(savedData));
+        }
+    </script>
+</body>
+</html>

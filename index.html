@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QTS Resource Hub - Quantity Surveying Department</title>
+    <meta name="description" content="Complete resource platform for Quantity Surveying students. Access slides, quizzes, GPA calculator, and more.">
+    <meta name="author" content="Opatola Abdulhamid Gbolahan">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏗️</div>
+                <span>QTS Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <div class="user-menu" style="display: none;">
+                <span class="user-name"></span>
+                <div class="user-avatar"></div>
+                <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+            </div>
+            <div class="auth-links">
+                <a href="login.html" class="btn btn-secondary btn-sm auth-link">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm auth-link">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🎓 Quantity Surveying Department</div>
+            <h1>Your Complete Academic Resource Hub</h1>
+            <p>Access lecture slides, take quizzes, calculate your GPA, connect with peers, and excel in your Quantity Surveying journey.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="courses.html" class="btn btn-primary">📚 Browse Courses</a>
+                <a href="register.html" class="btn btn-secondary">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section style="padding: 2rem;">
+        <div class="level-grid" style="max-width: 1200px;">
+            <div class="stat-card">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Courses Available</span>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Lecture Slides</span>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Quiz Questions</span>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                <span class="stat-number">1000+</span>
+                <span class="stat-label">Students Helped</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section style="padding: 3rem 2rem;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                Everything You Need to Succeed
+            </h2>
+            <div class="level-grid">
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">📚</div>
+                    <h3 class="card-title">Course Materials</h3>
+                    <p class="card-text">Access all lecture slides organized by level and semester. Download and study anytime, anywhere.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white;">📝</div>
+                    <h3 class="card-title">Interactive Quizzes</h3>
+                    <p class="card-text">Test your knowledge with instant-marked quizzes. Track your progress and compete on the leaderboard.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white;">🧮</div>
+                    <h3 class="card-title">GPA Calculator</h3>
+                    <p class="card-text">Calculate your GPA accurately with our easy-to-use calculator. Plan your academic success.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: white;">⏱️</div>
+                    <h3 class="card-title">Study Timer</h3>
+                    <p class="card-text">Stay focused with our built-in study timer. Track your study sessions and improve productivity.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #fa709a, #fee140); color: white;">💬</div>
+                    <h3 class="card-title">Discussion Forum</h3>
+                    <p class="card-text">Connect with fellow QTS students. Ask questions, share insights, and learn together.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon" style="background: linear-gradient(135deg, #ffecd2, #fcb69f); color: #333;">📋</div>
+                    <h3 class="card-title">Assignment Tracker</h3>
+                    <p class="card-text">Never miss a deadline. Track all your assignments and get notified before due dates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Levels -->
+    <section style="padding: 3rem 2rem;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <h2 style="text-align: center; color: white; font-size: 2.5rem; margin-bottom: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                Browse by Level
+            </h2>
+            <div class="level-grid">
+                <a href="courses.html?level=100" class="level-card" style="text-decoration: none; color: inherit;">
+                    <div class="level-header level-100">
+                        <h3>100 Level</h3>
+                        <p>Foundation Year</p>
+                    </div>
+                    <div class="level-body">
+                        <p style="color: var(--gray);">First & Second Semester courses available</p>
+                        <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                            <span class="semester-tab">First Sem</span>
+                            <span class="semester-tab">Second Sem</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="courses.html?level=200" class="level-card" style="text-decoration: none; color: inherit;">
+                    <div class="level-header level-200">
+                        <h3>200 Level</h3>
+                        <p>Intermediate Year</p>
+                    </div>
+                    <div class="level-body">
+                        <p style="color: var(--gray);">First & Second Semester courses available</p>
+                        <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                            <span class="semester-tab">First Sem</span>
+                            <span class="semester-tab">Second Sem</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="courses.html?level=300" class="level-card" style="text-decoration: none; color: inherit;">
+                    <div class="level-header level-300">
+                        <h3>300 Level</h3>
+                        <p>Advanced Year</p>
+                    </div>
+                    <div class="level-body">
+                        <p style="color: var(--gray);">First & Second Semester courses available</p>
+                        <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                            <span class="semester-tab">First Sem</span>
+                            <span class="semester-tab">Second Sem</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="courses.html?level=400" class="level-card" style="text-decoration: none; color: inherit;">
+                    <div class="level-header level-400">
+                        <h3>400 Level</h3>
+                        <p>Penultimate Year</p>
+                    </div>
+                    <div class="level-body">
+                        <p style="color: var(--gray);">Courses coming soon</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="color: var(--secondary); font-weight: 600;">🔜 Coming Soon</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="courses.html?level=500" class="level-card" style="text-decoration: none; color: inherit;">
+                    <div class="level-header level-500">
+                        <h3>500 Level</h3>
+                        <p>Final Year</p>
+                    </div>
+                    <div class="level-body">
+                        <p style="color: var(--gray);">Courses coming soon</p>
+                        <div style="margin-top: 1rem;">
+                            <span style="color: var(--secondary); font-weight: 600;">🔜 Coming Soon</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Announcements Preview -->
+    <section style="padding: 3rem 2rem;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="card">
+                <h2 style="margin-bottom: 1.5rem; color: var(--primary);">📢 Latest Announcements</h2>
+                <div id="announcementsList">
+                    <!-- Populated by JS -->
+                </div>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <a href="announcements.html" class="btn btn-primary">View All Announcements</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>QTS Resource Hub</h4>
+                <p style="color: rgba(255,255,255,0.7); line-height: 1.6;">
+                    The ultimate academic resource platform for Quantity Surveying students. 
+                    Built with passion for excellence in education.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="courses.html">Courses</a>
+                <a href="quiz.html">Quizzes</a>
+                <a href="forum.html">Forum</a>
+                <a href="leaderboard.html">Leaderboard</a>
+            </div>
+            <div class="footer-section">
+                <h4>Tools</h4>
+                <a href="gpa-calculator.html">GPA Calculator</a>
+                <a href="study-timer.html">Study Timer</a>
+                <a href="assignments.html">Assignments</a>
+                <a href="bookmarks.html">Bookmarks</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p style="color: rgba(255,255,255,0.7);">
+                    Department of Quantity Surveying<br>
+                    Built by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 QTS Resource Hub. All rights reserved. | Designed & Developed by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

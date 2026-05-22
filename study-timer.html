@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Timer - QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+    <style>
+        .timer-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0deg, #e2e8f0 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+        .timer-inner {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏗️</div>
+                <span>QTS Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <div class="user-menu" style="display: none;">
+                <span class="user-name"></span>
+                <div class="user-avatar"></div>
+                <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+            </div>
+            <div class="auth-links">
+                <a href="login.html" class="btn btn-secondary btn-sm auth-link">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm auth-link">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <h1 style="text-align: center; color: white; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">⏱️ Study Timer</h1>
+        <p style="text-align: center; color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Stay focused and track your study sessions</p>
+
+        <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <div class="timer-circle">
+                <div class="timer-inner">
+                    <div class="timer-display" id="timerDisplay">00:00:00</div>
+                    <p style="color: var(--gray); margin-top: 0.5rem;">Study Session</p>
+                </div>
+            </div>
+
+            <div class="timer-controls">
+                <button id="startTimer" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">▶️ Start</button>
+                <button id="pauseTimer" class="btn btn-secondary" style="font-size: 1.1rem; padding: 1rem 2rem;">⏸️ Pause</button>
+                <button id="resetTimer" class="btn btn-danger" style="font-size: 1.1rem; padding: 1rem 2rem;">🔄 Reset</button>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #f8fafc; border-radius: var(--radius-sm);">
+                <h4 style="margin-bottom: 1rem; color: var(--primary);">💡 Study Tips</h4>
+                <ul style="text-align: left; color: var(--gray); line-height: 2;">
+                    <li>Use the Pomodoro Technique: 25 min study, 5 min break</li>
+                    <li>Take a longer break (15-30 min) after 4 sessions</li>
+                    <li>Stay hydrated and keep your study space organized</li>
+                    <li>Review your notes within 24 hours of lectures</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>QTS Resource Hub</h4>
+                <p style="color: rgba(255,255,255,0.7);">Built by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 QTS Resource Hub | <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

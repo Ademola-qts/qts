@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Forum - QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏗️</div>
+                <span>QTS Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="forum.html" class="active">Forum</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <div class="user-menu" style="display: none;">
+                <span class="user-name"></span>
+                <div class="user-avatar"></div>
+                <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+            </div>
+            <div class="auth-links">
+                <a href="login.html" class="btn btn-secondary btn-sm auth-link">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm auth-link">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <h1 style="text-align: center; color: white; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">💬 Discussion Forum</h1>
+        <p style="text-align: center; color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Connect, discuss, and learn together</p>
+
+        <div class="card" style="max-width: 1000px; margin: 0 auto 2rem;">
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">Start a New Discussion</h3>
+            <form id="newTopicForm">
+                <div class="form-group">
+                    <input type="text" id="topicTitle" class="form-input" placeholder="Topic Title" required>
+                </div>
+                <div class="form-group">
+                    <select id="topicCourse" class="form-input" required>
+                        <option value="">Select Course</option>
+                        <option value="General">General Discussion</option>
+                        <option value="QTS 101">QTS 101</option>
+                        <option value="QTS 103">QTS 103</option>
+                        <option value="QTS 102">QTS 102</option>
+                        <option value="QTS 104">QTS 104</option>
+                        <option value="MTH 101">MTH 101</option>
+                        <option value="PHY 101">PHY 101</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea id="topicContent" class="form-input" rows="4" placeholder="What's on your mind?" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Discussion</button>
+            </form>
+        </div>
+
+        <div class="card" style="max-width: 1000px; margin: 0 auto;">
+            <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Recent Discussions</h3>
+            <div id="forumList">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>QTS Resource Hub</h4>
+                <p style="color: rgba(255,255,255,0.7);">Built by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 QTS Resource Hub | <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

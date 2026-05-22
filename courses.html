@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+    <style>
+        .level-selector {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .level-btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid white;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        .level-btn:hover, .level-btn.active {
+            background: white;
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏗️</div>
+                <span>QTS Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <div class="user-menu" style="display: none;">
+                <span class="user-name"></span>
+                <div class="user-avatar"></div>
+                <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+            </div>
+            <div class="auth-links">
+                <a href="login.html" class="btn btn-secondary btn-sm auth-link">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm auth-link">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <h1 style="text-align: center; color: white; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">📚 Course Materials</h1>
+        <p style="text-align: center; color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Select your level to view available courses and materials</p>
+
+        <div class="level-selector">
+            <button class="level-btn active" onclick="switchLevel(100)">100 Level</button>
+            <button class="level-btn" onclick="switchLevel(200)">200 Level</button>
+            <button class="level-btn" onclick="switchLevel(300)">300 Level</button>
+            <button class="level-btn" onclick="switchLevel(400)">400 Level</button>
+            <button class="level-btn" onclick="switchLevel(500)">500 Level</button>
+        </div>
+
+        <div class="card" style="max-width: 1000px; margin: 0 auto;">
+            <div class="semester-tabs" style="margin-bottom: 2rem;">
+                <button class="semester-tab active" onclick="switchSemester('first')">First Semester</button>
+                <button class="semester-tab" onclick="switchSemester('second')">Second Semester</button>
+            </div>
+
+            <div id="coursesContainer">
+                <!-- Courses loaded by JS -->
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button id="printCourses" class="btn btn-secondary no-print">🖨️ Print Course List</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>QTS Resource Hub</h4>
+                <p style="color: rgba(255,255,255,0.7);">Built by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 QTS Resource Hub | <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        let currentLevel = 100;
+        let currentSemester = 'first';
+
+        function switchLevel(level) {
+            currentLevel = level;
+            document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderLevelCourses(currentLevel, currentSemester);
+        }
+
+        function switchSemester(semester) {
+            currentSemester = semester;
+            document.querySelectorAll('.semester-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            renderLevelCourses(currentLevel, currentSemester);
+        }
+
+        // Load initial courses
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const level = urlParams.get('level');
+            if (level) {
+                currentLevel = parseInt(level);
+                document.querySelectorAll('.level-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.textContent.includes(currentLevel));
+                });
+            }
+            renderLevelCourses(currentLevel, currentSemester);
+        });
+    </script>
+</body>
+</html>

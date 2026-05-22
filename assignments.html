@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏗️</div>
+                <span>QTS Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <div class="user-menu" style="display: none;">
+                <span class="user-name"></span>
+                <div class="user-avatar"></div>
+                <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+            </div>
+            <div class="auth-links">
+                <a href="login.html" class="btn btn-secondary btn-sm auth-link">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm auth-link">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <h1 style="text-align: center; color: white; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">📋 Assignment Tracker</h1>
+        <p style="text-align: center; color: rgba(255,255,255,0.9); margin-bottom: 2rem;">Never miss a deadline again</p>
+
+        <div class="card" style="max-width: 900px; margin: 0 auto 2rem;">
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">Add New Assignment</h3>
+            <form id="addAssignmentForm">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem; align-items: end;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Assignment Title</label>
+                        <input type="text" id="assignmentTitle" class="form-input" placeholder="e.g., Week 3 Tutorial" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Course Code</label>
+                        <input type="text" id="assignmentCourse" class="form-input" placeholder="e.g., QTS 101" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Due Date</label>
+                        <input type="date" id="assignmentDue" class="form-input" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card" style="max-width: 900px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 style="color: var(--primary);">My Assignments</h3>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary btn-sm" onclick="filterAssignments('all')">All</button>
+                    <button class="btn btn-secondary btn-sm" onclick="filterAssignments('pending')">Pending</button>
+                    <button class="btn btn-secondary btn-sm" onclick="filterAssignments('completed')">Completed</button>
+                </div>
+            </div>
+            <div id="assignmentsList">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>QTS Resource Hub</h4>
+                <p style="color: rgba(255,255,255,0.7);">Built by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 QTS Resource Hub | <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        function filterAssignments(filter) {
+            const assignments = JSON.parse(localStorage.getItem('qts_assignments') || '[]');
+            const container = document.getElementById('assignmentsList');
+
+            let filtered = assignments;
+            if (filter === 'pending') filtered = assignments.filter(a => !a.completed);
+            if (filter === 'completed') filtered = assignments.filter(a => a.completed);
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<p class="text-center" style="color: var(--gray);">No assignments found</p>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(assignment => {
+                const daysLeft = Math.ceil((new Date(assignment.dueDate) - new Date()) / (1000 * 60 * 60 * 24));
+                const isOverdue = daysLeft < 0 && !assignment.completed;
+
+                return `
+                    <div class="assignment-item ${assignment.completed ? 'completed' : ''}">
+                        <div class="assignment-checkbox ${assignment.completed ? 'checked' : ''}" onclick="toggleAssignment(${assignment.id})">
+                            ${assignment.completed ? '✓' : ''}
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">${assignment.title}</div>
+                            <div style="font-size: 0.85rem; color: var(--gray);">${assignment.course} • Due: ${new Date(assignment.dueDate).toLocaleDateString()}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            ${!assignment.completed ? `
+                                <span style="font-size: 0.85rem; padding: 0.25rem 0.75rem; border-radius: 50px; background: ${isOverdue ? '#fee2e2' : daysLeft <= 3 ? '#fef3c7' : '#d1fae5'}; color: ${isOverdue ? '#dc2626' : daysLeft <= 3 ? '#92400e' : '#059669'};">
+                                    ${isOverdue ? 'Overdue!' : daysLeft + ' days left'}
+                                </span>
+                            ` : '<span style="font-size: 0.85rem; color: var(--accent);">✓ Done</span>'}
+                        </div>
+                        <button class="btn btn-danger btn-sm" onclick="deleteAssignment(${assignment.id})">🗑️</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            filterAssignments('all');
+        });
+    </script>
+</body>
+</html>

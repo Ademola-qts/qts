@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🏗️</div>
+                <span>QTS Hub</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="quiz.html">Quizzes</a></li>
+                <li><a href="forum.html">Forum</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+            <div class="user-menu" style="display: none;">
+                <span class="user-name"></span>
+                <div class="user-avatar"></div>
+                <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+                <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+            </div>
+            <div class="auth-links">
+                <a href="login.html" class="btn btn-secondary btn-sm auth-link">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm auth-link">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        <h1 style="color: white; margin-bottom: 2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">📊 My Dashboard</h1>
+
+        <div class="dashboard-grid">
+            <aside class="sidebar">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div class="user-avatar" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1rem;"></div>
+                    <h3 class="user-name" style="color: var(--dark);"></h3>
+                    <p style="color: var(--gray);" id="userLevel"></p>
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#overview" class="active" onclick="showSection('overview')">📊 Overview</a></li>
+                    <li><a href="#bookmarks" onclick="showSection('bookmarks')">⭐ Bookmarks</a></li>
+                    <li><a href="#assignments" onclick="showSection('assignments')">📋 Assignments</a></li>
+                    <li><a href="#quiz-history" onclick="showSection('quiz-history')">📝 Quiz History</a></li>
+                    <li><a href="gpa-calculator.html">🧮 GPA Calculator</a></li>
+                    <li><a href="study-timer.html">⏱️ Study Timer</a></li>
+                    <li><a href="announcements.html">📢 Announcements</a></li>
+                </ul>
+            </aside>
+
+            <main class="main-content">
+                <!-- Overview Section -->
+                <div id="overview-section">
+                    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Overview</h2>
+                    <div class="level-grid" style="padding: 0; margin-bottom: 2rem;">
+                        <div class="stat-card">
+                            <span class="stat-number" id="totalQuizzes">0</span>
+                            <span class="stat-label">Quizzes Taken</span>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            <span class="stat-number" id="avgScore">0%</span>
+                            <span class="stat-label">Average Score</span>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                            <span class="stat-number" id="totalBookmarks">0</span>
+                            <span class="stat-label">Bookmarks</span>
+                        </div>
+                        <div class="stat-card" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                            <span class="stat-number" id="pendingAssignments">0</span>
+                            <span class="stat-label">Pending Tasks</span>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem; color: var(--primary);">Recent Activity</h3>
+                    <div id="recentActivity" class="card">
+                        <p style="color: var(--gray);">No recent activity. Start exploring courses and taking quizzes!</p>
+                    </div>
+                </div>
+
+                <!-- Bookmarks Section -->
+                <div id="bookmarks-section" style="display: none;">
+                    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">⭐ My Bookmarks</h2>
+                    <div id="bookmarksList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Assignments Section -->
+                <div id="assignments-section" style="display: none;">
+                    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">📋 Assignment Tracker</h2>
+                    <div class="card" style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem;">Add New Assignment</h3>
+                        <form id="addAssignmentForm">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 1rem; align-items: end;">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <input type="text" id="assignmentTitle" class="form-input" placeholder="Assignment Title" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <input type="text" id="assignmentCourse" class="form-input" placeholder="Course Code" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <input type="date" id="assignmentDue" class="form-input" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="assignmentsList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Quiz History Section -->
+                <div id="quiz-history-section" style="display: none;">
+                    <h2 style="margin-bottom: 1.5rem; color: var(--primary);">📝 Quiz History</h2>
+                    <div id="quizHistoryList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>QTS Resource Hub</h4>
+                <p style="color: rgba(255,255,255,0.7);">Built by <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 QTS Resource Hub | <span class="programmer-credit">Opatola Abdulhamid Gbolahan</span></p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        function showSection(section) {
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('overview-section').style.display = 'none';
+            document.getElementById('bookmarks-section').style.display = 'none';
+            document.getElementById('assignments-section').style.display = 'none';
+            document.getElementById('quiz-history-section').style.display = 'none';
+
+            document.getElementById(section + '-section').style.display = 'block';
+        }
+
+        // Load dashboard data
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('qts_user'));
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            document.querySelectorAll('.user-name').forEach(el => el.textContent = user.name);
+            document.querySelectorAll('.user-avatar').forEach(el => el.textContent = user.avatar);
+            document.getElementById('userLevel').textContent = user.level + ' Level Student';
+
+            // Update stats
+            const quizResults = JSON.parse(localStorage.getItem('qts_quiz_results') || '[]');
+            const bookmarks = JSON.parse(localStorage.getItem('qts_bookmarks') || '[]');
+            const assignments = JSON.parse(localStorage.getItem('qts_assignments') || '[]');
+
+            document.getElementById('totalQuizzes').textContent = quizResults.length;
+            document.getElementById('totalBookmarks').textContent = bookmarks.length;
+            document.getElementById('pendingAssignments').textContent = assignments.filter(a => !a.completed).length;
+
+            if (quizResults.length > 0) {
+                const avg = Math.round(quizResults.reduce((sum, r) => sum + r.percentage, 0) / quizResults.length);
+                document.getElementById('avgScore').textContent = avg + '%';
+            }
+
+            // Render quiz history
+            const historyList = document.getElementById('quizHistoryList');
+            if (quizResults.length === 0) {
+                historyList.innerHTML = '<p style="color: var(--gray);">No quizzes taken yet.</p>';
+            } else {
+                historyList.innerHTML = quizResults.map(r => `
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h4 style="color: var(--primary);">${r.courseCode}</h4>
+                                <p style="color: var(--gray); font-size: 0.9rem;">${new Date(r.date).toLocaleDateString()}</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 1.5rem; font-weight: 800; color: ${r.percentage >= 70 ? 'var(--accent)' : r.percentage >= 50 ? 'var(--warning)' : 'var(--danger)'};">${r.percentage}%</div>
+                                <div style="color: var(--gray); font-size: 0.9rem;">${r.score}/${r.total}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        });
+    </script>
+</body>
+</html>

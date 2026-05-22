@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - QTS Resource Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="logo-icon" style="margin: 0 auto 1rem; width: 60px; height: 60px; font-size: 2rem;">🏗️</div>
+                <h2>Welcome Back!</h2>
+                <p>Login to access your QTS resources</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Login</button>
+                <p style="text-align: center; color: var(--gray);">
+                    Don't have an account? <a href="register.html" style="color: var(--primary); font-weight: 600;">Register</a>
+                </p>
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="index.html" style="color: var(--gray); text-decoration: none;">← Back to Home</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
