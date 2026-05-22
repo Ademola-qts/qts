@@ -2,8 +2,8 @@
 // Programmed by Opatola Abdulhamid Gbolahan
 
 // Supabase Configuration - REPLACE THESE WITH YOUR ACTUAL VALUES
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://nzcjszulboxkgcamfsms.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_u8v3_2NtKVLZXXydWQGYag_YFzLt6dm';
 
 // Initialize Supabase client (when ready)
 let supabase = null;
